@@ -1,0 +1,11 @@
+{
+  "name": "@auto-forge-org/theejs-site-builder",
+  "version": "0.1.0",
+  "description": "A minimal Three.js site builder demo that builds a static dist without external installs.",
+  "author": "auto-forge-org",
+  "license": "MIT",
+  "scripts": {
+    "build": "node build.js",
+    "test": "node test.js"
+  }
+}
