@@ -18,7 +18,7 @@ async function copyDir(src, dest) {
   const src = path.join(cwd, 'src');
   const dist = path.join(cwd, 'dist');
   try {
-    if (fs.promises.rm) {
+    if (fs.promises && typeof fs.promises.rm === 'function') {
       await fs.promises.rm(dist, { recursive: true, force: true });
     } else {
       // Fallback for older Node versions
