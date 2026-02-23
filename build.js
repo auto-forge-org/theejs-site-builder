@@ -17,11 +17,15 @@ async function copyDir(src, dest) {
   const cwd = __dirname;
   const src = path.join(cwd, 'src');
   const dist = path.join(cwd, 'dist');
-  if (fs.promises.rm) {
-    await fs.promises.rm(dist, { recursive: true, force: true });
-  } else {
-    // Fallback for older Node versions
-    await fs.promises.rmdir(dist, { recursive: true });
+  try {
+    if (fs.promises.rm) {
+      await fs.promises.rm(dist, { recursive: true, force: true });
+    } else {
+      // Fallback for older Node versions
+      await fs.promises.rmdir(dist, { recursive: true });
+    }
+  } catch (err) {
+    // ignore removal errors (e.g., path doesn't exist)
   }
   await fs.promises.mkdir(dist, { recursive: true });
   try {
