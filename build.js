@@ -17,7 +17,12 @@ async function copyDir(src, dest) {
   const cwd = __dirname;
   const src = path.join(cwd, 'src');
   const dist = path.join(cwd, 'dist');
-  await fs.promises.rm(dist, { recursive: true, force: true });
+  if (fs.promises.rm) {
+    await fs.promises.rm(dist, { recursive: true, force: true });
+  } else {
+    // Fallback for older Node versions
+    await fs.promises.rmdir(dist, { recursive: true });
+  }
   await fs.promises.mkdir(dist, { recursive: true });
   try {
     const files = await fs.promises.readdir(src);
